@@ -1,0 +1,150 @@
+﻿Portfolio: Python File Manipulation and Data Handling
+________________
+
+
+Project Description:
+This project demonstrates the use of Python to manipulate text files, manage lists of IP addresses, and perform various file operations such as reading from and writing to files. The project also highlights key Python functions such as open(), .read(), .write(), .split(), and list operations like .remove() to manipulate the contents of a file. The project implements an algorithm that allows for the removal of specific IP addresses from a file and updates the file accordingly.
+________________
+
+
+Code Snippets
+Code 1: Reading and Writing to Files
+# Define a function named `update_file` that takes in two parameters: `import_file` and `remove_list`
+# and combines the steps you've written in this lab leading up to this
+def update_file(import_file, remove_list):
+    # Build `with` statement to read in the initial contents of the file
+    with open(import_file, "r") as file:
+        # Use `.read()` to read the imported file and store it in a variable named `ip_addresses`
+        ip_addresses = file.read()
+
+
+    # Use `.split()` to convert `ip_addresses` from a string to a list
+    ip_addresses = ip_addresses.split()
+
+
+    # Build iterative statement
+    # Name loop variable `element`
+    # Loop through a copy of `ip_addresses` to avoid modification issues
+    for element in ip_addresses[:]:
+        # Build conditional statement
+        # If current element is in `remove_list`,
+        if element in remove_list:
+            # then current element should be removed from `ip_addresses`
+            ip_addresses.remove(element)
+
+
+    # Convert `ip_addresses` back to a string so that it can be written into the text file     
+    ip_addresses = " ".join(ip_addresses)
+
+
+    # Build `with` statement to rewrite the original file
+    with open(import_file, "w") as file:
+        # Rewrite the file, replacing its contents with `ip_addresses`
+        file.write(ip_addresses)
+
+
+# Call `update_file()` and pass in "allow_list.txt" and a list of IP addresses to be removed
+update_file("allow_list.txt", ["192.168.25.60", "192.168.140.81", "192.168.203.198"])
+
+
+# Build `with` statement to read in the updated file
+with open("allow_list.txt", "r") as file:
+    # Read in the updated file and store the contents in `text`
+    text = file.read()
+
+
+# Display the contents of `text`
+print(text)
+
+
+
+
+
+
+# Define a function to read from and write to a file
+def update_file(import_file, remove_list):
+    # Open file in read mode to read its contents
+    with open(import_file, "r") as file:
+        ip_addresses = file.read()  # Read the entire file content into a variable
+
+
+    ip_addresses = ip_addresses.split()  # Split the string into a list of IP addresses
+
+
+    # Loop through the list of IP addresses to remove those in the remove_list
+    for element in ip_addresses[:]:
+        if element in remove_list:  # Check if the element is in the remove_list
+            ip_addresses.remove(element)  # Remove the element from the list
+
+
+    ip_addresses = " ".join(ip_addresses)  # Join the list back into a string for writing
+
+
+    # Open file in write mode to overwrite its contents with updated IP addresses
+    with open(import_file, "w") as file:
+        file.write(ip_addresses)  # Write the modified content back to the file
+
+
+# Example usage of the function
+update_file("allow_list.txt", ["192.168.25.60", "192.168.140.81", "192.168.203.198"])
+
+
+________________
+
+
+Explanation of the Code Components:
+1. The with Statement and the open() Function
+The with statement is used to open a file. It is a more Pythonic way to work with files as it automatically handles closing the file once the operation is complete, preventing file handle leaks. This is preferred over using the open() function directly because it ensures that files are properly closed, even if an error occurs within the block.
+python
+Copy code
+with open(import_file, "r") as file:
+    ip_addresses = file.read()
+
+
+* open(import_file, "r"): Opens the file specified by the import_file variable in read mode.
+* with open() as file:: Ensures that the file is automatically closed after reading.
+2. The .read() Method
+The .read() method is used to read the entire content of the file as a single string. This is ideal when you want to process the entire file at once.
+python
+Copy code
+ip_addresses = file.read()  # Reads all the content into the variable `ip_addresses`
+
+
+3. The .write() Method
+The .write() method is used to write a string to a file. If the file already exists, it will overwrite the existing content.
+python
+Copy code
+file.write(ip_addresses)  # Writes the modified IP addresses back to the file
+
+
+4. The .split() Method
+The .split() method splits a string into a list of substrings based on the default whitespace separator. In our case, it converts the space-separated string of IP addresses into a list for easier manipulation.
+python
+Copy code
+ip_addresses = ip_addresses.split()  # Converts the string of IP addresses into a list
+
+
+5. The for Loop
+The for loop is used to iterate over a sequence (in this case, a list of IP addresses). The loop allows us to check each element in the list and perform actions on it.
+python
+Copy code
+for element in ip_addresses[:]:  # Iterates over a copy of the list to prevent modification issues
+
+
+6. The .remove() Method
+The .remove() method is used to remove the first occurrence of a specified value from a list. In this project, we used .remove() to delete IP addresses that are present in the remove_list.
+python
+Copy code
+ip_addresses.remove(element)  # Removes the element if it's found in the list
+
+
+________________
+
+
+Summary:
+This project demonstrates how Python can be used for file manipulation, specifically for updating the contents of a text file containing a list of IP addresses. Key techniques such as reading and writing to files, manipulating strings, and modifying lists using .split(), .remove(), and loops were utilized. The use of the with statement ensures proper file handling, while the .read() and .write() methods allow for efficient file input/output. This portfolio also demonstrates the power of Python for automating administrative tasks such as managing access lists by efficiently removing specific entries.
+By incorporating these Python techniques, you can automate the process of maintaining and updating lists within files, making the task faster, more reliable, and error-free.
+________________
+
+
+Feel free to include screenshots of your code and its output as evidence of successful execution of the project. This portfolio outlines the key aspects of using Python for file manipulation, making it an ideal addition to any collection of Python-based projects.
